@@ -78,7 +78,10 @@ class_weight
 # Define the preprocessing steps
 preprocessor = make_column_transformer(
     (StandardScaler(), numeric_features),
-    remainder='passthrough'   # all other columns already numeric as per prep.py
+    (OrdinalEncoder(), binary_features),
+    (OrdinalEncoder(categories=ordinal_order), ordinal_features),
+    (OneHotEncoder(handle_unknown='ignore'), categorical_features),
+    remainder='passthrough'
 )
 
 # Define base XGBoost model

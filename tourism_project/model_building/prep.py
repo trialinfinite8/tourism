@@ -24,14 +24,6 @@ df.drop(columns=['Unnamed: 0', 'CustomerID'], inplace=True)
 df['Gender'] = df['Gender'].replace('Fe Male', 'Female')
 df['MaritalStatus'] = df['MaritalStatus'].replace('Unmarried', 'Single')
 
-# Encode categorical columns
-ordinal_encoder = OrdinalEncoder(categories=[['Executive', 'Manager', 'Senior Manager', 'AVP', 'VP']])
-df['Designation'] = ordinal_encoder.fit_transform(df[['Designation']])
-label_encoder = LabelEncoder()
-df['TypeofContact'] = label_encoder.fit_transform(df['TypeofContact'])
-df['Gender'] = label_encoder.fit_transform(df['Gender'])
-df = pd.get_dummies(df, columns=['Occupation', 'ProductPitched', 'MaritalStatus'], dtype=int)
-
 # Define target variable
 target_col = 'ProdTaken'
 
